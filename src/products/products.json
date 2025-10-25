@@ -1,0 +1,268 @@
+[
+  {
+    "id": 1,
+    "name": "Mobile Phone Stand",
+    "price": "$89.99",
+    "category": "Home & Office",
+    "description": "IFAMIO 2 Pack Bamboo Cell Phone Stand Wooden Phone Holder Tablet Desk Stand with Charging Hole Portable Phone Table Stand Desk Organizer Compatible with iPhone Smart Phone iPad Tablet.",
+    "image1": "https://m.media-amazon.com/images/I/71CE9FAgg7L._AC_SL1500_.jpg",
+    "image2": "https://m.media-amazon.com/images/I/81y6E71FxpL._AC_SL1500_.jpg",
+    "image3": "https://m.media-amazon.com/images/I/71BKeUB6IyL._AC_SL1500_.jpg",
+    "featured": true
+  },
+  {
+    "id": 2,
+    "name": "Reusable Straw Set",
+    "price": "$69.99",
+    "category": "Kitchen & Dining",
+    "description": "GET FRESH Reusable Bamboo Drinking Straws Set - 6-Pack Natural Straws for Kids and Adults - BPA-Free Non-Plastic Original Set for Everyday Use.",
+    "image1": "https://m.media-amazon.com/images/I/41lJZM7bC7L._AC_.jpg",
+    "image2": "https://m.media-amazon.com/images/I/717mNhJGUfL._AC_SL1500_.jpg",
+    "image3": "https://m.media-amazon.com/images/I/61i+wz0NswL._AC_SL1500_.jpg",
+    "featured": true
+  },
+  {
+    "id": 3,
+    "name": "Cordless Window Shades",
+    "price": "$59.99",
+    "category": "Home & Living",
+    "description": "Outdoor Cordless Bamboo Window Shades, Waterproof Wood Roller Blinds with 6 Inches Valance, Light Filtering Roller Shades Window Blinds for Patio, Doors, Porch, Balcony, Gazebo, Pergola,Deck Color5.",
+    "image1": "https://m.media-amazon.com/images/I/81ZXH-pfh6L._AC_SL1500_.jpg",
+    "image2": "https://m.media-amazon.com/images/I/71Hc-VL4+wL._AC_SL1500_.jpg",
+    "image3": "https://m.media-amazon.com/images/I/81W+YUg7A8L._AC_SL1500_.jpg",
+    "featured": true
+  },
+  {
+    "id": 4,
+    "name": "Bamboo Headphones",
+    "price": "$99.99",
+    "category": "Electronics",
+    "description": "Over-ear bamboo headphones with high-fidelity sound and comfortable fit.",
+    "image1": "https://s.alicdn.com/@sc04/kf/Hdbbcae9b979b405bb544b2d0f5f98d77V.jpg?avif=close&webp=close",
+    "image2": "https://s.alicdn.com/@sc04/kf/H46b4b4f518ee42229301499f08ae56bbC.jpg?avif=close&webp=close",
+    "image3": "https://s.alicdn.com/@sc04/kf/H51f900e281ac40ca8855ee255e243c0bh.jpg?avif=close&webp=close",
+    "featured": true
+  },
+  {
+    "id": 5,
+    "name": "Comb Set for Hair",
+    "price": "$129.99",
+    "category": "Personal Care",
+    "description": "100% Bamboo Hair Brushes and Comb Set by Combetter, Comb for Women and Detangling, Great on All Hair, Eco-Friendly and Handmade for Women Men and Kids.",
+    "image1": "https://m.media-amazon.com/images/I/71aihkqxVzL._SL1500_.jpg",
+    "image2": "https://m.media-amazon.com/images/I/71IpPIqYTmL._SL1500_.jpg",
+    "image3": "https://m.media-amazon.com/images/I/719TRaOB96L._SL1500_.jpg",
+    "featured": false
+  },
+  {
+    "id": 6,
+    "name": "Cutting Boards Set",
+    "price": "$39.99",
+    "category": "Kitchen & Dining",
+    "description": "Bamboo Cutting Boards for Kitchen [Set of 3] Wood Cutting Board for Chopping Meat, Vegetables, Fruits, Cheese, Knife Friendly Serving Tray with Handles.",
+    "image1": "https://m.media-amazon.com/images/I/81DmMQFXTYL._AC_SL1500_.jpg",
+    "image2": "https://m.media-amazon.com/images/I/81gLwPfpWbL._AC_SL1500_.jpg",
+    "image3": "https://m.media-amazon.com/images/I/81G7LE-rOGL._AC_SL1500_.jpg",
+    "featured": false
+  },
+  {
+    "id": 7,
+    "name": "Japanese Style Bento Box",
+    "price": "$19.99",
+    "category": "Kitchen & Dining",
+    "description": "Japanese Bamboo Bento Box with Compartments and Utensils Stackable Lunch Box Includes Lunch Bag for Meal Prep Black.",
+    "image1": "https://m.media-amazon.com/images/I/71+iq4gPgTL._AC_SL1500_.jpg",
+    "image2": "https://m.media-amazon.com/images/I/71dnf8eJfML._AC_SL1500_.jpg",
+    "image3": "https://m.media-amazon.com/images/I/81peKph+ToL._AC_SL1500_.jpg",
+    "featured": false
+  },
+  {
+    "id": 8,
+    "name": "Bamboo Sunglasses",
+    "price": "$49.99",
+    "category": "Fashion & Accessories",
+    "description": "Stylish bamboo sunglasses with UV protection and polarized lenses.",
+    "image1": "https://cdn11.bigcommerce.com/s-g2q9po18ob/images/stencil/1280x1280/products/155/543/1869F0C8-6D31-4E48-B044-A22692064B4B__79153.1666577571.JPG?c=2",
+    "image2": "https://cdn11.bigcommerce.com/s-g2q9po18ob/images/stencil/960w/products/155/544/IMG_3280__07943.1666577622.jpg?c=2",
+    "image3": "https://cdn11.bigcommerce.com/s-g2q9po18ob/images/stencil/1280x1280/products/156/547/5766B3E3-2FE8-4B0D-88C7-D651A454E8A0__06837.1666578123.JPG?c=2",
+    "featured": false
+  },
+  {
+    "id": 9,
+    "name": "Bamboo Infinity Pencils",
+    "price": "$49.99",
+    "category": "Office Supplies",
+    "description": "Set of 12 eco-friendly bamboo pencils with smooth writing experience.",
+    "image1": "https://bambooindia.com/cdn/shop/files/pencils_3_720x.webp?v=1703181441",
+    "image2": "https://bambooindia.com/cdn/shop/files/pencils_2_720x.webp?v=1703181441",
+    "image3": "https://bambooindia.com/cdn/shop/files/pencils_5_720x.webp?v=1703181441",
+    "featured": false
+  },
+  {
+    "id": 10,
+    "name": "Eco-friendly Notebook",
+    "price": "$24.99",
+    "category": "Office Supplies",
+    "description": "Eco Friendly Notebooks Journals, 3-Pack, Spiral bound Hard Kraft Cover, 100% Recycled Paper, 200 College Ruled Pages. Sturdy, Portable writing",
+    "image1": "https://m.media-amazon.com/images/I/81a03ciX-dL._AC_SX466_.jpg",
+    "image2": "https://m.media-amazon.com/images/I/91jP-dPcZ9L._AC_SL1500_.jpg",
+    "image3": "https://m.media-amazon.com/images/I/61qdbRIaCsL._AC_SL1500_.jpg",
+    "featured": false
+  },
+  {
+    "id": 11,
+    "name": "Bamboo Toothbrush Set",
+    "price": "$79.99",
+    "category": "Personal Care",
+    "description": "bmbu Bamboo Toothbrush 4 Pack - Medium/Soft Charcoal Bristles Tooth Brushes Wooden Handle - BPA Free, Eco Friendly, Vegan Product Gift Idea, Sustainably Grown in Recycled Biodegradable Packaging",
+    "image1": "https://m.media-amazon.com/images/I/71wO3hkLjqL._SX466_.jpg",
+    "image2": "https://m.media-amazon.com/images/I/719clLftc5L._SL1500_.jpg",
+    "image3": "https://m.media-amazon.com/images/I/61wnCiCbdXL._SL1500_.jpg",
+    "featured": false
+  },
+  {
+    "id": 12,
+    "name": "Biodegradable Utensil Set",
+    "price": "$29.99",
+    "category": "Kitchen & Dining",
+    "description": "100% Bamboo Heavy Duty Disposable Cutlery [100PK:40 Fork 40 Spoon 20 Knife] Eco Friendly Natural Compostable Biodegradable Utensils | Premium Sustainable Organic alternate to Plastic & Wooden Flatware",
+    "image1": "https://m.media-amazon.com/images/I/919pE9OgIHL._AC_SL1500_.jpg",
+    "image2": "https://m.media-amazon.com/images/I/810FlVrIWQL._AC_SL1500_.jpg",
+    "image3": "https://m.media-amazon.com/images/I/81U9BJlz++L._AC_SL1500_.jpg",
+    "featured": false
+  },
+
+  
+  {
+    "id": 13,
+    "name": "Bamboo Laptop Stand",
+    "price": "$79.99",
+    "category": "Home & Office",
+    "description": "Tangkula 100% Bamboo Laptop Desk with Tilting Top & Drawer, Height Adjustable Portable Breakfast Serving Bed Tray with Heat-Dissipation Holes, Folding Bed Table for Surfing Reading Writing Eating.",
+    "image1": "https://m.media-amazon.com/images/I/71AG0wkGKuL._AC_SL1500_.jpg",
+    "image2": "https://m.media-amazon.com/images/I/71pjSDMzj5L._AC_SL1500_.jpg",
+    "image3": "https://m.media-amazon.com/images/I/71EqTppLGHL._AC_SL1500_.jpg",
+    "featured": true
+  },
+  {
+    "id": 14,
+    "name": "Bamboo Wireless Keyboard & Mouse",
+    "price": "$109.99",
+    "category": "Electronics",
+    "description": "Wireless Bamboo Keyboard and Mouse – Natural, Handmade, Eco-Friendly. Compact Keyboard with 2 Keypads. 3-Button Mouse with Scroll Wheel. Comes with a Wooden Pen by Trio Gato.",
+    "image1": "https://m.media-amazon.com/images/I/818xweG4cUL._AC_SL1500_.jpg",
+    "image2": "https://m.media-amazon.com/images/I/91U-qmwTmcL._AC_SL1500_.jpg",
+    "image3": "https://m.media-amazon.com/images/I/91GidINQ7sL._AC_SL1500_.jpg",
+    "featured": true
+  },
+  {
+    "id": 15,
+    "name": "Bamboo Shower Caddy",
+    "price": "$59.99",
+    "category": "Home & Living",
+    "description": "Crew & Axel Bamboo Hanging Shower Caddy Rustproof Made from Natural Bamboo 2 Level Storage Organizer Waterproof & Anti Stain - Over The Shower Head Caddy 27' x 11' x 5'",
+    "image1": "https://m.media-amazon.com/images/I/91rJ-NfH32L._AC_SL1500_.jpg",
+    "image2": "https://m.media-amazon.com/images/I/71zGTCijnkL._AC_SL1500_.jpg",
+    "image3": "https://m.media-amazon.com/images/I/715D+Vw0tuL._AC_SL1500_.jpg",
+    "featured": false
+  },
+  {
+    "id": 16,
+    "name": "Bamboo Drawer Organizer",
+    "price": "$34.99",
+    "category": "Kitchen & Dining",
+    "description": "Youeon Set of 6 Bamboo Drawer Organizer Storage Box, Adjustable Cutlery Drawer Organizer, Silverware Organizer Multi-Use for Office, Home, Kitchen, Bedroom, Bathroom.",
+    "image1": "https://m.media-amazon.com/images/I/71y+XgT5ZEL._AC_SL1500_.jpg",
+    "image2": "https://m.media-amazon.com/images/I/81te2kljk5L._AC_SL1500_.jpg",
+    "image3": "https://m.media-amazon.com/images/I/71g7edzKjkL._AC_SL1500_.jpg",
+    "featured": false
+  },
+  {
+    "id": 17,
+    "name": "Bamboo Coffee Cup",
+    "price": "$24.99",
+    "category": "Kitchen & Dining",
+    "description": "Sustainable and eco-Friendly: Our Bamboo Coffee Cup is Crafted from Sustainable Bamboo, offering an eco-Friendly Alternative to Single-use Plastic Cups. (Ste of 2)",
+    "image1": "https://m.media-amazon.com/images/I/71XsPWvMulL._SL1500_.jpg",
+    "image2": "https://m.media-amazon.com/images/I/71h0ii6ZtML._SL1500_.jpg",
+    "image3": "https://m.media-amazon.com/images/I/61kEfP-vL5L._SL1500_.jpg",
+    "featured": false
+  },
+  {
+    "id": 18,
+    "name": "Bamboo Soap Dish",
+    "price": "$14.99",
+    "category": "Personal Care",
+    "description": "Bamboo Soap Dish Self-Draining Non-Slip Soap Saver - Wooden Trays for Bar Soap - Kitchen, Shower, Bathroom - 3 Pack.",
+    "image1": "https://m.media-amazon.com/images/I/71zcvVqClqL._AC_SL1500_.jpg",
+    "image2": "https://m.media-amazon.com/images/I/714e0ODimpL._AC_SL1500_.jpg",
+    "image3": "https://m.media-amazon.com/images/I/71LJ-bCbEyL._AC_SL1500_.jpg",
+    "featured": false
+  },
+  {
+    "id": 19,
+    "name": "Bamboo Watch",
+    "price": "$129.99",
+    "category": "Fashion & Accessories",
+    "description": "Treehut Wooden Bamboo Watches for Men, Japanese Quartz Movement, Stylish Exotic Wrist Watch with Brown Leather Straps, Watch Made from Wood, Relojes para Hombre.",
+    "image1": "https://m.media-amazon.com/images/I/51eoKCuYIqL._AC_.jpg",
+    "image2": "https://m.media-amazon.com/images/I/51+oeS1iw6L._AC_.jpg",
+    "image3": "https://m.media-amazon.com/images/I/51kHxxMl+nL._AC_.jpg",
+    "featured": true
+  },
+  {
+    "id": 20,
+    "name": "Bamboo Drawer Storage Box",
+    "price": "$44.99",
+    "category": "Home & Office",
+    "description": "YBM HOME Bamboo Drawer Organizer Storage Box for Kitchen Drawer, Junk Drawer, Office, Bedroom, Children Room, Craft, Sewing, and Bathroom, 6x12x2 inches.",
+    "image1": "https://m.media-amazon.com/images/I/717WBlkGZTL._AC_SL1500_.jpg",
+    "image2": "https://m.media-amazon.com/images/I/71YWQK4gSCL._AC_SL1500_.jpg",
+    "image3": "https://m.media-amazon.com/images/I/71eycf51f6L._AC_SL1500_.jpg",
+    "featured": false
+  },
+  {
+    "id": 21,
+    "name": "Bamboo Towel Rack",
+    "price": "$59.99",
+    "category": "Home & Living",
+    "description": "[en.casa] Towel rack Træna 85x33.5x20 cm bamboo.",
+    "image1": "https://m.media-amazon.com/images/I/715Fy2UmXlL._AC_SL1500_.jpg",
+    "image2": "https://m.media-amazon.com/images/I/611iUjG-WnL._AC_SL1500_.jpg",
+    "image3": "https://m.media-amazon.com/images/I/61PvVTsEToL._AC_SL1500_.jpg",
+    "featured": false
+  },
+  {
+    "id": 22,
+    "name": "Bamboo Pen Holder",
+    "price": "$19.99",
+    "category": "Office Supplies",
+    "description": "Bamboo Wood Desk Pen Pencil Holder Stand Multi Purpose Use Pencil Cup Pot Desk Organizer.",
+    "image1": "https://m.media-amazon.com/images/I/51V2aMxGrYL._AC_SL1000_.jpg",
+    "image2": "https://m.media-amazon.com/images/I/71wZPX30fwL._AC_SL1000_.jpg",
+    "image3": "https://m.media-amazon.com/images/I/61goBNuyeSL._AC_SL1000_.jpg",
+    "featured": false
+  },
+  {
+    "id": 23,
+    "name": "Bamboo Water Bottle",
+    "price": "$39.99",
+    "category": "Kitchen & Dining",
+    "description": "Bamboo Water Bottle with Carrying Handle, Insulated Stainless Steel Thermos, Double Wall Tumbler for Hot/Cold Tea, Coffee, and Juices, 16oz",
+    "image1": "https://m.media-amazon.com/images/I/61Fu7iS+CFL._AC_SL1500_.jpg",
+    "image2": "https://m.media-amazon.com/images/I/61LBM5DK1QL._AC_SL1500_.jpg",
+    "image3": "https://m.media-amazon.com/images/I/71Yd3uykOWL._AC_SL1500_.jpg",
+    "featured": true
+  },
+  {
+    "id": 24,
+    "name": "Bamboo Makeup Brush Set",
+    "price": "$29.99",
+    "category": "Personal Care",
+    "description": "SY-WBM-003 Eco-Friendly 4 in 1 Bamboo Makeup Brush Set Travel Size",
+    "image1": "https://sy-beauty.com/wp-content/uploads/2024/04/SY-WBM-003-2-jpg.webp",
+    "image2": "https://sy-beauty.com/wp-content/uploads/2024/04/SY-WBM-003-4-jpg.webp",
+    "image3": "https://sy-beauty.com/wp-content/uploads/2024/04/SY-WBM-003-5-jpg.webp",
+    "featured": false
+  }
+]
