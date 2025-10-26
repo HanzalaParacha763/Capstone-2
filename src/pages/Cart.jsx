@@ -3,60 +3,75 @@ import { Add, Remove, Delete } from "@mui/icons-material";
 import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addItem, decreaseQuantity, removeItem, clearCart } from "../store/slices/cartList";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Cart() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    // ✅ Get cart data from Redux store
     const { items, totalAmount } = useSelector((state) => state.cart);
 
-    const handleIncrease = (item) => {
-        dispatch(addItem({ ...item })); // adds one more of same item
-    };
-
-    const handleDecrease = (id) => {
-        dispatch(decreaseQuantity(id)); // decreases quantity by 1
-    };
-
-    const handleRemove = (id) => {
-        dispatch(removeItem(id)); // removes entire item
-    };
-
-    if (items.length === 0) {
-        return (
-            <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-b from-lime-50 to-yellow-50 text-center px-6">
-                <Typography variant="h4" className="font-bold text-lime-700 mb-4">
-                    Your Cart is Empty 🛍
-                </Typography>
-                <Typography variant="body1" className="text-gray-600 mb-8">
-                    Looks like you haven’t added anything yet. Go find something you love!
-                </Typography>
-                <Button
-                    variant="contained"
-                    sx={{
-                        backgroundColor: "#eab308",
-                        "&:hover": { backgroundColor: "#ca8a04" },
-                        borderRadius: "9999px",
-                        px: 4,
-                        py: 1.2,
-                        fontWeight: "600",
-                        textTransform: "none",
-                    }}
-                    onClick={() => navigate("/products")}
-                >
-                    Back to Shop
-                </Button>
-            </div>
-        );
-    }
+    const handleIncrease = (item) => dispatch(addItem({ ...item }));
+    const handleDecrease = (id) => dispatch(decreaseQuantity(id));
+    const handleRemove = (id) => dispatch(removeItem(id));
 
     const shipping = 4.99;
     const totalPrice = totalAmount.toFixed(2);
     const grandTotal = (totalAmount + shipping).toFixed(2);
 
+    // ✨ Page transition
+    const pageVariants = {
+        hidden: { opacity: 0, y: 30 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+    };
+
+    if (items.length === 0) {
+        return (
+            <motion.div
+                variants={pageVariants}
+                initial="hidden"
+                animate="show"
+                className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-b from-lime-50 to-yellow-50 text-center px-6"
+            >
+                <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <Typography variant="h4" className="font-extrabold text-lime-700 mb-4">
+                        Your Cart is Empty 🛍
+                    </Typography>
+                    <Typography variant="body1" className="text-gray-600 mb-8">
+                        Looks like you haven’t added anything yet. Go find something you love!
+                    </Typography>
+                    <Button
+                        variant="contained"
+                        sx={{
+                            backgroundColor: "#eab308",
+                            "&:hover": { backgroundColor: "#ca8a04" },
+                            borderRadius: "9999px",
+                            px: 4,
+                            py: 1.2,
+                            fontWeight: "600",
+                            textTransform: "none",
+                            boxShadow: "0 4px 14px rgba(202,138,4,0.25)",
+                        }}
+                        onClick={() => navigate("/products")}
+                    >
+                        Back to Shop
+                    </Button>
+                </motion.div>
+            </motion.div>
+        );
+    }
+
     return (
-        <div className="min-h-screen bg-gradient-to-b from-lime-50 to-yellow-50 px-6 sm:px-12 lg:px-24 py-12">
+        <motion.div
+            variants={pageVariants}
+            initial="hidden"
+            animate="show"
+            className="min-h-screen bg-gradient-to-b from-lime-50 to-yellow-50 px-6 sm:px-12 lg:px-24 py-12"
+        >
             <Typography
                 variant="h4"
                 className="font-extrabold text-lime-700 text-center mb-12"
@@ -65,74 +80,75 @@ export default function Cart() {
             </Typography>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-                {/* 🧾 Cart Items */}
-                <div className="lg:col-span-2 bg-white/60 rounded-2xl shadow-lg p-6 space-y-6 border border-lime-100">
-                    {items.map((item) => (
-                        <div
-                            key={item.id}
-                            className="flex flex-col sm:flex-row items-center justify-between gap-6 border-b border-gray-200 pb-6"
-                        >
-                            <div className="flex items-center gap-4 w-full sm:w-auto">
-                                <img
-                                    src={item.image}
-                                    alt={item.name}
-                                    className="w-24 h-24 rounded-xl object-cover shadow-sm"
-                                />
-                                <div>
-                                    <Typography
-                                        variant="h6"
-                                        className="text-lime-700 font-semibold"
-                                    >
-                                        {item.name}
-                                    </Typography>
-                                    <Typography
-                                        variant="body2"
-                                        className="text-gray-600 font-medium"
-                                    >
-                                        ${item.price.toFixed(2)}
-                                    </Typography>
+                {/* Cart Items */}
+                <div className="lg:col-span-2 bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg p-6 space-y-6 border border-lime-100">
+                    <AnimatePresence>
+                        {items.map((item) => (
+                            <motion.div
+                                key={item.id}
+                                initial={{ opacity: 0, y: 15 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -15 }}
+                                transition={{ duration: 0.3 }}
+                                className="flex flex-col sm:flex-row items-center justify-between gap-6 border-b border-gray-200 pb-6 hover:bg-lime-50/40 rounded-xl transition-all duration-300"
+                            >
+                                <div className="flex items-center gap-4 w-full sm:w-auto">
+                                    <img
+                                        src={item.image}
+                                        alt={item.name}
+                                        className="w-24 h-24 rounded-xl object-cover shadow-sm hover:scale-105 transition-transform duration-300"
+                                    />
+                                    <div>
+                                        <Typography
+                                            variant="h6"
+                                            className="text-lime-700 font-semibold"
+                                        >
+                                            {item.name}
+                                        </Typography>
+                                        <Typography
+                                            variant="body2"
+                                            className="text-gray-600 font-medium"
+                                        >
+                                            ${item.price.toFixed(2)}
+                                        </Typography>
+                                    </div>
                                 </div>
-                            </div>
 
-                            {/* Quantity Controls */}
-                            <div className="flex items-center gap-3">
-                                <IconButton
-                                    onClick={() => handleDecrease(item.id)}
-                                    size="small"
+                                {/* Quantity Controls */}
+                                <div className="flex items-center gap-3">
+                                    <IconButton onClick={() => handleDecrease(item.id)} size="small">
+                                        <Remove fontSize="small" />
+                                    </IconButton>
+                                    <Typography variant="body1" className="font-semibold text-gray-700">
+                                        {item.quantity}
+                                    </Typography>
+                                    <IconButton onClick={() => handleIncrease(item)} size="small">
+                                        <Add fontSize="small" />
+                                    </IconButton>
+                                </div>
+
+                                <Typography
+                                    variant="body1"
+                                    className="font-bold text-lime-700 min-w-[80px] text-right"
                                 >
-                                    <Remove fontSize="small" />
-                                </IconButton>
-                                <Typography variant="body1" className="font-semibold text-gray-700">
-                                    {item.quantity}
+                                    ${(item.totalPrice).toFixed(2)}
                                 </Typography>
-                                <IconButton
-                                    onClick={() => handleIncrease(item)}
-                                    size="small"
-                                >
-                                    <Add fontSize="small" />
+
+                                <IconButton onClick={() => handleRemove(item.id)} color="error" size="small">
+                                    <Delete />
                                 </IconButton>
-                            </div>
-
-                            <Typography
-                                variant="body1"
-                                className="font-bold text-lime-700 min-w-[80px] text-right"
-                            >
-                                ${(item.totalPrice).toFixed(2)}
-                            </Typography>
-
-                            <IconButton
-                                onClick={() => handleRemove(item.id)}
-                                color="error"
-                                size="small"
-                            >
-                                <Delete />
-                            </IconButton>
-                        </div>
-                    ))}
+                            </motion.div>
+                        ))}
+                    </AnimatePresence>
                 </div>
 
-                {/* 💵 Summary Section */}
-                <div className="bg-white/70 rounded-2xl shadow-lg p-6 border border-yellow-100 h-fit sticky top-10">
+                {/* Summary Section */}
+                <motion.div
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="bg-white/80 backdrop-blur-md rounded-2xl shadow-lg p-6 border border-yellow-100 h-fit sticky top-10"
+                >
                     <Typography variant="h6" className="font-bold text-lime-700 mb-6">
                         Order Summary
                     </Typography>
@@ -177,6 +193,7 @@ export default function Cart() {
                                 py: 1.4,
                                 fontWeight: "600",
                                 textTransform: "none",
+                                boxShadow: "0 4px 14px rgba(202,138,4,0.25)",
                             }}
                         >
                             Proceed to Checkout
@@ -214,8 +231,8 @@ export default function Cart() {
                     >
                         Clear Cart
                     </Button>
-                </div>
+                </motion.div>
             </div>
-        </div>
+        </motion.div>
     );
 }

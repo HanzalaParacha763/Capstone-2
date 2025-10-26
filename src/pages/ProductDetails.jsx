@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addItem } from "../store/slices/cartList";
 import {
+    Box,
     Button,
     Typography,
     Card,
@@ -11,6 +12,7 @@ import {
     IconButton,
 } from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
+import CheckIcon from "@mui/icons-material/Check";
 import { motion, AnimatePresence } from "framer-motion";
 import products from "../products/products.json";
 
@@ -209,28 +211,60 @@ export default function ProductDetails() {
                 </CardContent>
             </Card>
 
-            {/* ✅ Toast Notification */}
+            {/* Toast Notification */}
             <AnimatePresence>
                 {showToast && (
                     <motion.div
-                        initial={{ opacity: 0, x: 100, y: -20 }}
-                        animate={{ opacity: 1, x: 0, y: 0 }}
-                        exit={{ opacity: 0, x: 100 }}
-                        transition={{ duration: 0.4 }}
-                        className="fixed top-6 right-6 bg-white shadow-2xl rounded-xl px-5 py-4 border-l-4 border-lime-500 z-[9999] w-80"
+                        initial={{ opacity: 0, scale: 0.85, x: 100, y: -20 }}
+                        animate={{
+                            opacity: 1,
+                            scale: 1,
+                            x: 0,
+                            y: 0,
+                            transition: {
+                                type: "spring",
+                                stiffness: 200,
+                                damping: 20,
+                            },
+                        }}
+                        exit={{
+                            opacity: 0,
+                            scale: 0.85,
+                            x: 80,
+                            transition: { duration: 0.3 },
+                        }}
+                        className="fixed top-6 right-6 z-[9999] w-80  bg-white shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-lime-500 rounded-2xl overflow-hidden"
                     >
-                        {/* Header with IconButton */}
-                        <div className="flex justify-between items-center mb-1">
-                            <h3 className="text-lime-700 font-semibold text-lg">
-                                ✅ Product Added
+                        {/* Header */}
+                        <div className="flex justify-between items-start px-5 pt-4 pb-2">
+                            <h3 className="flex items-center text-lime-700 font-semibold text-lg">
+                                <motion.div
+                                    initial={{ scale: 0 }}
+                                    animate={{ scale: 1 }}
+                                    transition={{ type: "spring", stiffness: 300, damping: 10 }}
+                                    className="relative flex items-center justify-center mr-2"
+                                >
+                                    <span className="absolute w-6 h-6 bg-lime-400/40 rounded-full blur-md animate-pulse"></span>
+                                    <CheckIcon
+                                        sx={{
+                                            color: "white",
+                                            backgroundColor: "#65A30D",
+                                            borderRadius: "6px",
+                                            padding: "2px",
+                                            boxShadow: "0 0 8px #65A30D80",
+                                        }}
+                                    />
+                                </motion.div>
+                                Product Added
                             </h3>
+
                             <IconButton
                                 onClick={() => setShowToast(false)}
                                 size="small"
                                 sx={{
-                                    color: "#9ca3af", // gray-400
+                                    color: "#9ca3af",
                                     transition: "color 0.2s ease",
-                                    "&:hover": { color: "#ef4444" }, // red-500
+                                    "&:hover": { color: "#ef4444" },
                                 }}
                             >
                                 <svg
@@ -250,23 +284,39 @@ export default function ProductDetails() {
                             </IconButton>
                         </div>
 
-                        <p className="text-gray-600 text-sm mb-2">
-                            Product successfully added to your cart.
-                        </p>
+                        {/* Body */}
+                        <div className="px-5 pb-3">
+                            <p className="text-gray-700  text-sm mb-2">
+                                Product successfully added to your cart.
+                            </p>
+
+                            <Link
+                                to="/cart"
+                                className="text-sm text-lime-500 font-medium hover:underline hover:underline-offset-4 transition-all duration-200"
+                            >
+                                View Cart & Checkout →
+                            </Link>
+                        </div>
 
                         {/* Progress Bar */}
-                        <div className="h-1 bg-lime-200 rounded-full overflow-hidden">
+                        <div className="h-1 bg-lime-100 rounded-full mx-5 mb-4 overflow-hidden">
                             <motion.div
                                 initial={{ width: 0 }}
                                 animate={{ width: `${progress}%` }}
-                                transition={{ duration: 0.05 }}
-                                className="h-full bg-lime-600"
-                                style={{ width: `${progress}%` }}
+                                transition={{
+                                    ease: "easeInOut",
+                                    duration: 0.5,
+                                }}
+                                className="h-full bg-gradient-to-r from-lime-500 to-lime-400"
+                                style={{
+                                    boxShadow: "0 0 10px #65A30D80",
+                                }}
                             />
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
+
 
         </div>
     );

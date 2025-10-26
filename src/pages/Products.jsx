@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
     Card,
@@ -12,6 +12,7 @@ import {
     MenuItem,
     TextField,
 } from "@mui/material";
+import { motion } from "framer-motion";
 import products from "../products/products.json";
 
 const categories = [
@@ -30,7 +31,6 @@ export default function Products() {
     const navigate = useNavigate();
     const { category } = useParams();
 
-    // Extract search query from URL (optional)
     const searchParams = new URLSearchParams(location.search);
     const initialSearch = searchParams.get("search")?.toLowerCase().trim() || "";
 
@@ -38,7 +38,7 @@ export default function Products() {
     const [priceRange, setPriceRange] = useState([0, 150]);
     const [searchTerm, setSearchTerm] = useState(initialSearch);
 
-    // ✅ Sync category with URL
+    // ✅ Sync category from URL
     useEffect(() => {
         if (category && categories.includes(category)) {
             setSelectedCategory(category);
@@ -49,31 +49,40 @@ export default function Products() {
 
     const handlePriceChange = (_, newValue) => setPriceRange(newValue);
 
-    // ✅ Filtering logic (includes search)
-    const filteredProducts = products.filter((product) => {
-        const numericPrice = parseFloat(product.price.replace("$", "")) || 0;
-
-        const inCategory =
-            selectedCategory === "All" ||
-            product.category.toLowerCase() === selectedCategory.toLowerCase();
-
-        const inPriceRange =
-            numericPrice >= priceRange[0] && numericPrice <= priceRange[1];
-
-        const matchesSearch =
-            !searchTerm ||
-            product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            product.category.toLowerCase().includes(searchTerm.toLowerCase());
-
-        return inCategory && inPriceRange && matchesSearch;
-    });
+    // ✅ Filtered products memoized to prevent re-renders from re-triggering animations
+    const filteredProducts = useMemo(() => {
+        return products.filter((product) => {
+            const numericPrice = parseFloat(product.price.replace("$", "")) || 0;
+            const inCategory =
+                selectedCategory === "All" ||
+                product.category.toLowerCase() === selectedCategory.toLowerCase();
+            const inPriceRange =
+                numericPrice >= priceRange[0] && numericPrice <= priceRange[1];
+            const matchesSearch =
+                !searchTerm ||
+                product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                product.category.toLowerCase().includes(searchTerm.toLowerCase());
+            return inCategory && inPriceRange && matchesSearch;
+        });
+    }, [selectedCategory, priceRange, searchTerm]);
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-yellow-50 to-lime-50 px-4 sm:px-8 lg:px-16 py-12">
-            <div className="flex flex-col lg:flex-row gap-10">
-                {/* Sidebar Filter */}
-                <div className="lg:w-1/6 w-full">
-                    <div className="mb-8 flex justify-center">
+        <div className="min-h-screen bg-gradient-to-br from-lime-50 via-yellow-50 to-white px-6 sm:px-10 lg:px-16 py-12">
+            <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="flex flex-col lg:flex-row gap-10"
+            >
+                {/* Sidebar */}
+                <motion.aside
+                    initial={{ opacity: 0, x: -40 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1, duration: 0.6 }}
+                    className="lg:w-1/5 w-full"
+                >
+                    <div className="lg:sticky lg:top-20 bg-white/80 backdrop-blur-md rounded-2xl shadow-lg p-6 space-y-8 border border-lime-100">
+                        {/* Search */}
                         <TextField
                             label="Search Products"
                             variant="outlined"
@@ -81,23 +90,14 @@ export default function Products() {
                             onChange={(e) => setSearchTerm(e.target.value)}
                             fullWidth
                             sx={{
-                                maxWidth: 500,
                                 backgroundColor: "white",
                                 borderRadius: "12px",
-                                "& .MuiOutlinedInput-root": {
-                                    borderRadius: "12px",
-                                },
-                                "& .MuiInputLabel-root": {
-                                    color: "#4b5563",
-                                },
-                                "& .MuiOutlinedInput-notchedOutline": {
-                                    borderColor: "#d1d5db",
-                                },
+                                "& .MuiOutlinedInput-root": { borderRadius: "12px" },
+                                "& .MuiInputLabel-root": { color: "#4b5563" },
                             }}
                         />
-                    </div>
-                    <div className="lg:sticky lg:top-20 bg-white/70 backdrop-blur-md rounded-2xl shadow-md p-6 space-y-8">
-                        {/* Category Filter */}
+
+                        {/* Category */}
                         <div>
                             <Typography className="font-semibold text-gray-700 mb-3 text-sm uppercase tracking-wide">
                                 Category
@@ -124,7 +124,7 @@ export default function Products() {
                             </FormControl>
                         </div>
 
-                        {/* Price Range Filter */}
+                        {/* Price Range */}
                         <div>
                             <Typography className="font-semibold text-gray-700 mb-3 text-sm uppercase tracking-wide">
                                 Price Range
@@ -146,7 +146,7 @@ export default function Products() {
                             />
                         </div>
 
-                        {/* Reset Filters */}
+                        {/* Reset */}
                         <Button
                             variant="outlined"
                             onClick={() => {
@@ -173,36 +173,41 @@ export default function Products() {
                             Reset Filters
                         </Button>
                     </div>
-                </div>
+                </motion.aside>
 
                 {/* Products Grid */}
-                <div className="flex-1">
-                    {/* ✅ Search Bar */}
-                    
-
+                <motion.section
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.15, duration: 0.7 }}
+                    className="flex-1"
+                >
                     {filteredProducts.length > 0 ? (
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-10">
                             {filteredProducts.map((product) => (
-                                <Card
+                                <motion.div
                                     key={product.id}
-                                    onClick={() =>
-                                        navigate(`/product/${product.id}`, {
-                                            state: { product },
-                                        })
-                                    }
-                                    className="rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-lime-50 border border-lime-100 cursor-pointer"
+                                    initial={{ opacity: 0, y: 40 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.6, ease: "easeOut" }}
                                 >
-                                    <div className="relative w-full aspect-square overflow-hidden rounded-t-2xl">
-                                        <CardMedia
-                                            component="img"
-                                            image={product.image1}
-                                            alt={product.name}
-                                            className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                                        />
-                                    </div>
+                                    <Card
+                                        onClick={() =>
+                                            navigate(`/product/${product.id}`, { state: { product } })
+                                        }
+                                        className="group rounded-2xl shadow-md transition-all duration-500 ease-out transform-gpu hover:scale-[1.04] hover:shadow-2xl bg-white border border-lime-100 cursor-pointer overflow-hidden"
+                                    >
+                                        <div className="relative w-full aspect-square overflow-hidden">
+                                            <CardMedia
+                                                component="img"
+                                                image={product.image1}
+                                                alt={product.name}
+                                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                        </div>
 
-                                    <CardContent className="flex flex-col items-center justify-between text-center p-5">
-                                        <div>
+                                        <CardContent className="flex flex-col items-center justify-between text-center p-5">
                                             <Typography
                                                 variant="h6"
                                                 className="font-semibold text-lime-700 mb-1 truncate"
@@ -215,38 +220,62 @@ export default function Products() {
                                             >
                                                 {product.price}
                                             </Typography>
-                                        </div>
-
-                                        <Button
-                                            variant="contained"
-                                            sx={{
-                                                backgroundColor: "#eab308",
-                                                "&:hover": {
-                                                    backgroundColor: "#ca8a04",
-                                                },
-                                                borderRadius: "9999px",
-                                                paddingX: 3,
-                                                paddingY: 0.8,
-                                                fontWeight: "600",
-                                                textTransform: "none",
-                                            }}
-                                        >
-                                            View Details
-                                        </Button>
-                                    </CardContent>
-                                </Card>
+                                            <motion.div whileTap={{ scale: 0.95 }}>
+                                                <Button
+                                                    variant="contained"
+                                                    sx={{
+                                                        backgroundColor: "#eab308",
+                                                        "&:hover": { backgroundColor: "#ca8a04" },
+                                                        borderRadius: "9999px",
+                                                        paddingX: 3,
+                                                        paddingY: 0.8,
+                                                        fontWeight: "600",
+                                                        textTransform: "none",
+                                                        boxShadow: "0 3px 12px rgba(234,179,8,0.3)",
+                                                    }}
+                                                >
+                                                    View Details
+                                                </Button>
+                                            </motion.div>
+                                        </CardContent>
+                                    </Card>
+                                </motion.div>
                             ))}
                         </div>
                     ) : (
-                        <Typography
-                            variant="h6"
-                            className="text-center text-gray-500 mt-16 italic"
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            className="flex flex-col items-center mt-16"
                         >
-                            No products found matching your filters.
-                        </Typography>
+                            <Typography
+                                variant="h6"
+                                className="text-gray-500 text-center italic mb-4"
+                            >
+                                No products found matching your filters.
+                            </Typography>
+                            <Button
+                                onClick={() => {
+                                    setSearchTerm("");
+                                    setSelectedCategory("All");
+                                    setPriceRange([0, 150]);
+                                }}
+                                sx={{
+                                    backgroundColor: "#84cc16",
+                                    "&:hover": { backgroundColor: "#65a30d" },
+                                    color: "white",
+                                    borderRadius: "9999px",
+                                    px: 3,
+                                    py: 0.8,
+                                    textTransform: "none",
+                                }}
+                            >
+                                Reset Search
+                            </Button>
+                        </motion.div>
                     )}
-                </div>
-            </div>
+                </motion.section>
+            </motion.div>
         </div>
     );
 }
