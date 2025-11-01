@@ -1,6 +1,5 @@
 # Bamboo Bliss — React + Vite Starter 🪴
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Vite](https://img.shields.io/badge/bundler-vite-yellowgreen.svg)](https://vitejs.dev/)
 [![React](https://img.shields.io/badge/framework-react-61DAFB.svg)](https://reactjs.org/)
 [![Demo](https://img.shields.io/badge/demo-live-brightgreen.svg)](https://bamboo-bliss.vercel.app)
