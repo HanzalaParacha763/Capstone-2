@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import {
     AppBar,
     Box,
@@ -16,9 +19,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import SearchIcon from "@mui/icons-material/Search";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import logo from "../assets/logo-new.png";
+
+import logo from "../assets/logo.png";
 
 export default function Navbar() {
     const theme = useTheme();
@@ -28,21 +30,24 @@ export default function Navbar() {
     const location = useLocation();
     const navigate = useNavigate();
 
-    // ✅ Access cart from Redux
+    // Cart items count 
     const cartItems = useSelector((state) => state.cart.items);
     const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+
 
     const navLinks = [
         { label: "Home", path: "/" },
         { label: "Products", path: "/products" },
     ];
 
+    // Dynamic styles fro active Link
     const activeStyle = (path) =>
         location.pathname === path
             ? { color: "#65A30D", fontWeight: 700 }
             : { color: "#374151", "&:hover": { color: "#65A30D" } };
 
-    // ✅ Handle search
+
+    // Redirects to products pafe with ?search query
     const handleSearch = (e) => {
         e.preventDefault();
         if (searchTerm.trim()) {
@@ -70,7 +75,6 @@ export default function Navbar() {
                     px: { xs: 2, md: 6 },
                 }}
             >
-                {/* Logo */}
                 <Link to="/">
                     <Box sx={{ display: "flex", alignItems: "center", gap: 1, textDecoration: "none" }}>
                         <img
@@ -94,10 +98,9 @@ export default function Navbar() {
                     </Box>
                 </Link>
 
-                {/* Desktop Menu */}
                 {!isMobile && (
                     <Box sx={{ display: "flex", alignItems: "center", gap: 4 }}>
-                        {/* Search Bar */}
+
                         <Box
                             component="form"
                             onSubmit={handleSearch}
@@ -122,7 +125,6 @@ export default function Navbar() {
                             </IconButton>
                         </Box>
 
-                        {/* Nav Links */}
                         {navLinks.map((link) => (
                             <Link key={link.path} to={link.path} style={{ textDecoration: "none" }}>
                                 <Typography
@@ -139,7 +141,6 @@ export default function Navbar() {
                             </Link>
                         ))}
 
-                        {/* Cart */}
                         <Link to="/cart">
                             <Badge badgeContent={cartCount} color="success" overlap="circular">
                                 <IconButton
@@ -175,14 +176,13 @@ export default function Navbar() {
                             </Badge>
                         </Link>
 
-                        <IconButton onClick={() => setDrawerOpen(true)} sx={{ color: "#65A30D" }}>
+                        <IconButton aria-label="open menu" onClick={() => setDrawerOpen(true)} sx={{ color: "#65A30D" }}>
                             <MenuIcon sx={{ fontSize: 30 }} />
                         </IconButton>
                     </Box>
                 )}
             </Toolbar>
 
-            {/* Drawer */}
             <Drawer
                 anchor="right"
                 open={drawerOpen}
@@ -192,7 +192,7 @@ export default function Navbar() {
                 }}
             >
                 <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
-                    {/* Header */}
+
                     <Box
                         sx={{
                             display: "flex",
@@ -234,7 +234,6 @@ export default function Navbar() {
                         </IconButton>
                     </Box>
 
-                    {/* Links */}
                     <Box sx={{ display: "flex", flexDirection: "column", p: 2, gap: 2 }}>
                         {navLinks.map((link) => (
                             <Link
@@ -267,7 +266,6 @@ export default function Navbar() {
                             </Link>
                         ))}
 
-                        {/* Cart Button */}
                         <Link to="/cart" onClick={() => setDrawerOpen(false)}>
                             <Button
                                 variant="contained"

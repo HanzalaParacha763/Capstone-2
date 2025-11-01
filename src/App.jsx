@@ -1,6 +1,6 @@
-import './App.css'
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+
 import Home from './pages/Home'
 import Layout from './pages/Layout.jsx';
 import NotFound from './pages/NotFound.jsx';
@@ -8,6 +8,11 @@ import Products from './pages/Products.jsx';
 import ProductDetails from './pages/ProductDetails.jsx';
 import Cart from './pages/Cart.jsx';
 import Checkout from './pages/Checkout.jsx';
+
+
+
+import 'react-toastify/dist/ReactToastify.css';
+import './App.css'
 
 function App() {
 
@@ -26,6 +31,16 @@ function App() {
           </Route>
         </Routes>
       </Router>
+      <ToastContainer
+        position='top-right'
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnHover
+        draggable
+        theme='light'
+      />
     </>
   )
 }

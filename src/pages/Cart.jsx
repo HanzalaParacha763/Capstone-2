@@ -1,9 +1,13 @@
-import { Button, Typography, IconButton, Divider } from "@mui/material";
-import { Add, Remove, Delete } from "@mui/icons-material";
 import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addItem, decreaseQuantity, removeItem, clearCart } from "../store/slices/cartList";
+
 import { motion, AnimatePresence } from "framer-motion";
+
+import { Button, Typography, IconButton, Divider } from "@mui/material";
+import { ShoppingCartSharp } from "@mui/icons-material";
+import { Add, Remove, Delete } from "@mui/icons-material";
+
+import { addItem, decreaseQuantity, removeItem, clearCart } from "../store/slices/cartList";
 
 export default function Cart() {
     const navigate = useNavigate();
@@ -15,11 +19,18 @@ export default function Cart() {
     const handleDecrease = (id) => dispatch(decreaseQuantity(id));
     const handleRemove = (id) => dispatch(removeItem(id));
 
+    const handleClearCart = () => {
+        if (window.confirm("Are you sure you want to clear your cart?")) {
+            dispatch(clearCart());
+        }
+
+    }
+
     const shipping = 4.99;
     const totalPrice = totalAmount.toFixed(2);
     const grandTotal = (totalAmount + shipping).toFixed(2);
 
-    // ✨ Page transition
+    // Page transition
     const pageVariants = {
         hidden: { opacity: 0, y: 30 },
         show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
@@ -38,10 +49,11 @@ export default function Cart() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <Typography variant="h4" className="font-extrabold text-lime-700 mb-4">
-                        Your Cart is Empty 🛍
+                    <Typography variant="h4" className="font-extrabold text-lime-700 pb-4">
+                        Your Cart is Empty &nbsp; 
+                        <ShoppingCartSharp/>
                     </Typography>
-                    <Typography variant="body1" className="text-gray-600 mb-8">
+                    <Typography variant="body1" className="text-gray-600 pb-8">
                         Looks like you haven’t added anything yet. Go find something you love!
                     </Typography>
                     <Button
@@ -215,7 +227,7 @@ export default function Cart() {
                         }}
                         onClick={() => navigate("/products")}
                     >
-                        Continue Shopping
+                        Continue Shopping   
                     </Button>
 
                     <Button
@@ -227,7 +239,7 @@ export default function Cart() {
                             fontWeight: "600",
                             textTransform: "none",
                         }}
-                        onClick={() => dispatch(clearCart())}
+                        onClick={handleClearCart}
                     >
                         Clear Cart
                     </Button>

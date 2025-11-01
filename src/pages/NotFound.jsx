@@ -10,8 +10,8 @@ const NotFound = () => {
                 Oops! Page Not Found
             </p>
             <p className="text-gray-600 max-w-md mb-8">
-                The page you’re looking for doesn’t exist or may have been moved.
-                Let’s get you back to shopping!
+                The page you're looking for doesn't exist or may have been moved.
+                Let's get you back to shopping!
             </p>
 
             <Link

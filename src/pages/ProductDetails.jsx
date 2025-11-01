@@ -1,9 +1,9 @@
-import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addItem } from "../store/slices/cartList";
+import { toast } from "react-toastify";
+
 import {
-    Box,
     Button,
     Typography,
     Card,
@@ -11,10 +11,13 @@ import {
     CardContent,
     IconButton,
 } from "@mui/material";
+import { ShoppingCart } from "@mui/icons-material";
 import { Add, Remove } from "@mui/icons-material";
-import CheckIcon from "@mui/icons-material/Check";
-import { motion, AnimatePresence } from "framer-motion";
+
+
 import products from "../products/products.json";
+
+import { addItem } from "../store/slices/cartList";
 
 export default function ProductDetails() {
     const { id } = useParams();
@@ -23,8 +26,6 @@ export default function ProductDetails() {
 
     const [mainImage, setMainImage] = useState(product?.image1);
     const [quantity, setQuantity] = useState(1);
-    const [showToast, setShowToast] = useState(false);
-    const [progress, setProgress] = useState(0);
 
     if (!product) {
         return (
@@ -49,7 +50,6 @@ export default function ProductDetails() {
         );
     }
 
-    const cleanPrice = Number(product.price.replace(/[^0-9.]/g, ""));
 
     const increaseQty = () => setQuantity((prev) => prev + 1);
     const decreaseQty = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
@@ -60,30 +60,28 @@ export default function ProductDetails() {
                 addItem({
                     id: product.id,
                     name: product.name,
-                    price: cleanPrice,
+                    price: product.price,
                     image: product.image1,
                 })
             );
         }
 
-        // Trigger toast
-        setShowToast(true);
-        setProgress(0);
-
-        // Animate progress for 3 seconds
-        const duration = 3000;
-        const step = 100 / (duration / 50);
-        const interval = setInterval(() => {
-            setProgress((prev) => {
-                if (prev >= 100) {
-                    clearInterval(interval);
-                    setTimeout(() => setShowToast(false), 250);
-                    return 100;
-                }
-                return prev + step;
-            });
-        }, 50);
+        toast.success(`${quantity} x ${product.name} added to cart!`, {
+            style: {
+                borderRadius: "12px",
+                background: "#fff",
+                color: "#166534",
+                border: "1px solid #84cc16",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+                fontWeight: 500,
+            },
+            progressStyle: {
+                background: "linear-gradient(to right, #84cc16, #bef264)",
+            },
+        });
     };
+
+
 
     return (
         <div className="min-h-screen bg-gradient-to-b from-yellow-50 to-lime-50 flex flex-col items-center py-16 px-6 md:px-20 relative">
@@ -111,7 +109,6 @@ export default function ProductDetails() {
 
             {/* Product Card */}
             <Card className="flex flex-col md:flex-row w-full max-w-5xl shadow-xl rounded-3xl bg-white overflow-hidden">
-                {/* Product Image Section */}
                 <div className="md:w-1/2 flex flex-col items-center p-6">
                     <div className="relative w-full overflow-hidden rounded-2xl mb-6 bg-white flex items-center justify-center aspect-square">
                         <CardMedia
@@ -163,7 +160,7 @@ export default function ProductDetails() {
                         {product.description}
                     </Typography>
 
-                    {/* Quantity Controls */}
+                    {/* Quantity Selector */}
                     <div className="flex items-center gap-3 mb-6">
                         <IconButton
                             onClick={decreaseQty}
@@ -192,7 +189,6 @@ export default function ProductDetails() {
                         </IconButton>
                     </div>
 
-                    {/* Add to Cart */}
                     <Button
                         variant="contained"
                         onClick={handleAddToCart}
@@ -212,112 +208,6 @@ export default function ProductDetails() {
             </Card>
 
             {/* Toast Notification */}
-            <AnimatePresence>
-                {showToast && (
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.85, x: 100, y: -20 }}
-                        animate={{
-                            opacity: 1,
-                            scale: 1,
-                            x: 0,
-                            y: 0,
-                            transition: {
-                                type: "spring",
-                                stiffness: 200,
-                                damping: 20,
-                            },
-                        }}
-                        exit={{
-                            opacity: 0,
-                            scale: 0.85,
-                            x: 80,
-                            transition: { duration: 0.3 },
-                        }}
-                        className="fixed top-6 right-6 z-[9999] w-80  bg-white shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-lime-500 rounded-2xl overflow-hidden"
-                    >
-                        {/* Header */}
-                        <div className="flex justify-between items-start px-5 pt-4 pb-2">
-                            <h3 className="flex items-center text-lime-700 font-semibold text-lg">
-                                <motion.div
-                                    initial={{ scale: 0 }}
-                                    animate={{ scale: 1 }}
-                                    transition={{ type: "spring", stiffness: 300, damping: 10 }}
-                                    className="relative flex items-center justify-center mr-2"
-                                >
-                                    <span className="absolute w-6 h-6 bg-lime-400/40 rounded-full blur-md animate-pulse"></span>
-                                    <CheckIcon
-                                        sx={{
-                                            color: "white",
-                                            backgroundColor: "#65A30D",
-                                            borderRadius: "6px",
-                                            padding: "2px",
-                                            boxShadow: "0 0 8px #65A30D80",
-                                        }}
-                                    />
-                                </motion.div>
-                                Product Added
-                            </h3>
-
-                            <IconButton
-                                onClick={() => setShowToast(false)}
-                                size="small"
-                                sx={{
-                                    color: "#9ca3af",
-                                    transition: "color 0.2s ease",
-                                    "&:hover": { color: "#ef4444" },
-                                }}
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={2}
-                                    stroke="currentColor"
-                                    className="w-5 h-5"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
-                            </IconButton>
-                        </div>
-
-                        {/* Body */}
-                        <div className="px-5 pb-3">
-                            <p className="text-gray-700  text-sm mb-2">
-                                Product successfully added to your cart.
-                            </p>
-
-                            <Link
-                                to="/cart"
-                                className="text-sm text-lime-500 font-medium hover:underline hover:underline-offset-4 transition-all duration-200"
-                            >
-                                View Cart & Checkout →
-                            </Link>
-                        </div>
-
-                        {/* Progress Bar */}
-                        <div className="h-1 bg-lime-100 rounded-full mx-5 mb-4 overflow-hidden">
-                            <motion.div
-                                initial={{ width: 0 }}
-                                animate={{ width: `${progress}%` }}
-                                transition={{
-                                    ease: "easeInOut",
-                                    duration: 0.5,
-                                }}
-                                className="h-full bg-gradient-to-r from-lime-500 to-lime-400"
-                                style={{
-                                    boxShadow: "0 0 10px #65A30D80",
-                                }}
-                            />
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-
-
         </div>
     );
 }

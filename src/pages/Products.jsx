@@ -1,9 +1,8 @@
 import { useState, useEffect, useMemo } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { motion } from "framer-motion";
+
 import {
-    Card,
-    CardContent,
-    CardMedia,
     Typography,
     Button,
     Slider,
@@ -12,7 +11,8 @@ import {
     MenuItem,
     TextField,
 } from "@mui/material";
-import { motion } from "framer-motion";
+
+import ProductCard from "../components/ProductCard";
 import products from "../products/products.json";
 
 const categories = [
@@ -38,7 +38,7 @@ export default function Products() {
     const [priceRange, setPriceRange] = useState([0, 150]);
     const [searchTerm, setSearchTerm] = useState(initialSearch);
 
-    // ✅ Sync category from URL
+    // Syncing Catefory from URL params
     useEffect(() => {
         if (category && categories.includes(category)) {
             setSelectedCategory(category);
@@ -49,7 +49,7 @@ export default function Products() {
 
     const handlePriceChange = (_, newValue) => setPriceRange(newValue);
 
-    // ✅ Filtered products memoized to prevent re-renders from re-triggering animations
+    // Filtered products memoized to prevent re-renders from re-triggering animations
     const filteredProducts = useMemo(() => {
         return products.filter((product) => {
             const numericPrice = parseFloat(product.price.replace("$", "")) || 0;
@@ -74,7 +74,7 @@ export default function Products() {
                 transition={{ duration: 0.6, ease: "easeOut" }}
                 className="flex flex-col lg:flex-row gap-10"
             >
-                {/* Sidebar */}
+                {/* Search & Filter*/}
                 <motion.aside
                     initial={{ opacity: 0, x: -40 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -82,7 +82,7 @@ export default function Products() {
                     className="lg:w-1/5 w-full"
                 >
                     <div className="lg:sticky lg:top-20 bg-white/80 backdrop-blur-md rounded-2xl shadow-lg p-6 space-y-8 border border-lime-100">
-                        {/* Search */}
+                        {/* Search field of the navbar blocked on this page */}
                         <TextField
                             label="Search Products"
                             variant="outlined"
@@ -97,7 +97,7 @@ export default function Products() {
                             }}
                         />
 
-                        {/* Category */}
+                        {/* Category filter */}
                         <div>
                             <Typography className="font-semibold text-gray-700 mb-3 text-sm uppercase tracking-wide">
                                 Category
@@ -185,61 +185,7 @@ export default function Products() {
                     {filteredProducts.length > 0 ? (
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-10">
                             {filteredProducts.map((product) => (
-                                <motion.div
-                                    key={product.id}
-                                    initial={{ opacity: 0, y: 40 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.6, ease: "easeOut" }}
-                                >
-                                    <Card
-                                        onClick={() =>
-                                            navigate(`/product/${product.id}`, { state: { product } })
-                                        }
-                                        className="group rounded-2xl shadow-md transition-all duration-500 ease-out transform-gpu hover:scale-[1.04] hover:shadow-2xl bg-white border border-lime-100 cursor-pointer overflow-hidden"
-                                    >
-                                        <div className="relative w-full aspect-square overflow-hidden">
-                                            <CardMedia
-                                                component="img"
-                                                image={product.image1}
-                                                alt={product.name}
-                                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                                            />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                        </div>
-
-                                        <CardContent className="flex flex-col items-center justify-between text-center p-5">
-                                            <Typography
-                                                variant="h6"
-                                                className="font-semibold text-lime-700 mb-1 truncate"
-                                            >
-                                                {product.name}
-                                            </Typography>
-                                            <Typography
-                                                variant="body2"
-                                                className="text-gray-600 mb-3 text-sm"
-                                            >
-                                                {product.price}
-                                            </Typography>
-                                            <motion.div whileTap={{ scale: 0.95 }}>
-                                                <Button
-                                                    variant="contained"
-                                                    sx={{
-                                                        backgroundColor: "#eab308",
-                                                        "&:hover": { backgroundColor: "#ca8a04" },
-                                                        borderRadius: "9999px",
-                                                        paddingX: 3,
-                                                        paddingY: 0.8,
-                                                        fontWeight: "600",
-                                                        textTransform: "none",
-                                                        boxShadow: "0 3px 12px rgba(234,179,8,0.3)",
-                                                    }}
-                                                >
-                                                    View Details
-                                                </Button>
-                                            </motion.div>
-                                        </CardContent>
-                                    </Card>
-                                </motion.div>
+                                <ProductCard key={product.id} product={product}/>
                             ))}
                         </div>
                     ) : (

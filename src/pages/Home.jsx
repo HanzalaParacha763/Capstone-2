@@ -1,9 +1,16 @@
-import { Button, Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
+import { Button, Typography } from "@mui/material";
+
 import { motion } from "framer-motion";
+
 import products from "../products/products.json";
+import ProductCard from "../components/ProductCard";
 
 const featuredProducts = products.filter((prod) => prod.featured);
+
+const heroImages = products.filter((p) => p.image1).slice(0, 5).map((p) => p.image1);
 
 const categories = [
   { name: "All", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIeFMDS3d9FlbCeTyjigzCEPkp1pluR669qA&s" },
@@ -17,6 +24,16 @@ const categories = [
 ];
 
 export default function Home() {
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % heroImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-lime-50 to-amber-50 text-gray-800 overflow-hidden">
       {/* Hero Section */}
@@ -51,17 +68,24 @@ export default function Home() {
             Shop Now
           </Button>
         </div>
-        <motion.div
-          className="mt-10 md:mt-0 flex justify-center md:justify-end"
-          whileHover={{ scale: 1.03, rotate: 1 }}
-          transition={{ type: "spring", stiffness: 200, damping: 10 }}
-        >
-          <img
-            src="https://cdn11.bigcommerce.com/s-g2q9po18ob/images/stencil/1280x1280/products/155/543/1869F0C8-6D31-4E48-B044-A22692064B4B__79153.1666577571.JPG?c=2"
-            alt="Eco fashion"
-            className="w-full max-w-md rounded-2xl shadow-xl"
-          />
-        </motion.div>
+
+        {/* Rotating product images */}
+        <div className="relative w-full max-w-md h-[26rem] flex justify-center items-center">
+          {heroImages.map((img, index) => (
+            <motion.img
+              key={index}
+              src={img}
+              alt={`Product ${index + 1}`}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{
+                opacity: index === currentIndex ? 1 : 0,
+                scale: index === currentIndex ? 1 : 0.95,
+              }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
+              className="absolute rounded-2xl shadow-xl w-full h-full object-cover"
+            />
+          ))}
+        </div>
       </motion.section>
 
       {/* Category Section */}
@@ -144,47 +168,7 @@ export default function Home() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {featuredProducts.map((product) => (
-            <motion.div
-              key={product.id}
-              whileHover={{ scale: 1.03 }}
-              transition={{ type: "spring", stiffness: 200 }}
-            >
-              <Link to={`/product/${product.id}`} style={{ textDecoration: "none" }}>
-                <Card
-                  className="rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer"
-                  sx={{ backgroundColor: "#fefce8" }}
-                >
-                  <div className="relative w-full aspect-square overflow-hidden rounded-t-2xl">
-                    <CardMedia
-                      component="img"
-                      image={product.image1}
-                      alt={product.name}
-                      className="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                    />
-                  </div>
-                  <CardContent>
-                    <Typography variant="h6" className="font-semibold text-lime-700">
-                      {product.name}
-                    </Typography>
-                    <Typography variant="body2" className="text-gray-600 mb-4">
-                      {product.price}
-                    </Typography>
-                    <Button
-                      variant="contained"
-                      fullWidth
-                      sx={{
-                        backgroundColor: "#eab308",
-                        "&:hover": { backgroundColor: "#ca8a04" },
-                        borderRadius: "9999px",
-                        textTransform: "none",
-                      }}
-                    >
-                      View Details
-                    </Button>
-                  </CardContent>
-                </Card>
-              </Link>
-            </motion.div>
+            <ProductCard key={product.id} product={product} variant="home" />
           ))}
         </div>
       </motion.section>
