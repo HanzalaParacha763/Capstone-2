@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-
 import {
     Button,
     Typography,
@@ -11,7 +10,6 @@ import {
     CardContent,
     IconButton,
 } from "@mui/material";
-import { ShoppingCart } from "@mui/icons-material";
 import { Add, Remove } from "@mui/icons-material";
 
 
@@ -50,6 +48,7 @@ export default function ProductDetails() {
         );
     }
 
+    const cleanPrice = Number(product.price.replace(/[^0-9.]/g, ""));
 
     const increaseQty = () => setQuantity((prev) => prev + 1);
     const decreaseQty = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
@@ -60,13 +59,14 @@ export default function ProductDetails() {
                 addItem({
                     id: product.id,
                     name: product.name,
-                    price: product.price,
+                    price: cleanPrice,
                     image: product.image1,
                 })
             );
         }
 
-        toast.success(`${quantity} x ${product.name} added to cart!`, {
+        toast.success(`${quantity} × ${product.name} added to cart!`, {
+            icon: "🛒",
             style: {
                 borderRadius: "12px",
                 background: "#fff",
@@ -109,6 +109,7 @@ export default function ProductDetails() {
 
             {/* Product Card */}
             <Card className="flex flex-col md:flex-row w-full max-w-5xl shadow-xl rounded-3xl bg-white overflow-hidden">
+                {/* Product Image Section */}
                 <div className="md:w-1/2 flex flex-col items-center p-6">
                     <div className="relative w-full overflow-hidden rounded-2xl mb-6 bg-white flex items-center justify-center aspect-square">
                         <CardMedia
@@ -160,7 +161,7 @@ export default function ProductDetails() {
                         {product.description}
                     </Typography>
 
-                    {/* Quantity Selector */}
+                    {/* Quantity Controls */}
                     <div className="flex items-center gap-3 mb-6">
                         <IconButton
                             onClick={decreaseQty}
@@ -189,6 +190,7 @@ export default function ProductDetails() {
                         </IconButton>
                     </div>
 
+                    {/* Add to Cart */}
                     <Button
                         variant="contained"
                         onClick={handleAddToCart}
@@ -208,6 +210,8 @@ export default function ProductDetails() {
             </Card>
 
             {/* Toast Notification */}
+            
+
         </div>
     );
 }
